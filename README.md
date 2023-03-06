@@ -69,7 +69,7 @@ If necessary your lab (DHLAB or LHST) can grant you access to a machine on the I
      
 #### pipenv
 
-Note: the following procedure for pipenv has not been throughly tested, if you test it and there are other steps, please update this document via a pull request
+Note: the following procedure for pipenv has not been thoroughly tested, if you test it and there are other steps, please update this document via a pull request
 
 To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
 
