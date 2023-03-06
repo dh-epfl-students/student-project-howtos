@@ -50,7 +50,7 @@ You are free to structure your repository as you wish, but we advise to have:
 
 ## Working with a remote EPFL server
 
-If necessary the DHLAB can grant you access to a machine on the IC cluster:
+If necessary your lab (DHLAB or LHST) can grant you access to a machine on the IC cluster:
 
 - ask your supervisor to gain access;
 - login with gaspar credentials: ```ssh [gasparname]@iccluster0XX.iccluster.epfl.ch where 'XX' is the machine nb```     
