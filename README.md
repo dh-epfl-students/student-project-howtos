@@ -21,7 +21,7 @@ You are free to structure your repository as you wish, but we advise to have:
 
 - a `notebooks` folder, for your working notebook;
 - a `lib` folder, in case you convert your notebook in scripts with a command line interface;
-- a `report` fodler, where you put the PDF and latex sources of your report;
+- a `report` folder, where you put the PDF and latex sources of your report;
 - a README, with the information specified below.
 
 
@@ -59,13 +59,13 @@ If necessary the DHLAB can grant you access to a machine on the IC cluster:
 	- 2 GPUs
 	- 200GB of disk space on `/`
 	- 12TB of disk space under `scratch`
--  :warning: **important**: the machine is shared and given ths small size of `/`, do not store your data (i.e. the data you work with, intermediary results, models, various resources, etc.) in your `home` but under `scratch/students` where you can do your own folder. 
+-  :warning: **important**: the machine is shared and given the small size of `/`, do not store your data (i.e. the data you work with, intermediary results, models, various resources, etc.) in your `home` but under `scratch/students` where you can create your own folder. 
 
 
 ### For people using Python on a cluster node
 
 - create a **local** python environment using conda or pipenv. You need to ensure your environment is on the `/scratch/`, not `/home/`, to do so check guides just below.
-- to easily code locally and run things remotely, configure your IDE to save your code on the remote serveur as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
+- to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
      
 #### pipenv
 
@@ -115,7 +115,7 @@ If you run `jupyter notebook` the notebook will start and be accessible at http:
 In order to leave it open while you are executing things, you can run the notebook in a screen.
 
 
-### How to create another shell session and detach from is: use `screen`     
+### How to create another shell session and detach from it: use `screen`     
 
 **Main commands:**
 
@@ -137,9 +137,7 @@ In order to leave it open while you are executing things, you can run the notebo
 - `cd [your repo]`
 - `screen -S work` => you are in a screen named "work" where you will launch the notebook
 - activate your env
-- start the nb (`jupyter notebook`) 
+- start Jupyter notebook (`jupyter notebook`) 
 - check the url `http://iccluster0XX.iccluster.epfl.ch:8890`
 - if all ok then exit the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
-
-
 
