@@ -97,24 +97,42 @@ Documentation: [envs_dirs](https://conda.io/projects/conda/en/latest/user-guide/
 
 ### How to access a notebook on a remote server
 
-In order to access a jupyter notebook which runs on a remote server you need to configure the jupyter server-client setting accordingly. Have a look [here](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#running-a-notebook-server). 
+In order to access an instance of Jupyter notebook or Jupyter Lab running on a remote server, you can either configure Jupyter accordingly or use a SSH tunnel.
 
-- run `jupyter notebook --generate-config`, this will create a `.jupyter` folder in your home (hidden, use `ls -a`) 
-- use `jupyter notebook password` to set a password. 
-- edit the `jupyter_notebook_config.py` file in order to set the port where jupyter will broadcast. The following three lines are needed, all the rest can be commented:    
+#### Configuring Jupyter notebook for remote access
+
+Have a look at the [official Jupyter documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#running-a-notebook-server). 
+
+In summary, you have to:
+
+- Run `jupyter notebook --generate-config`. This will create a `.jupyter` folder in your home (hidden, use `ls -a`).
+- Use `jupyter notebook password` to set a password.
+- Edit the `jupyter_notebook_config.py` file in order to set the port where jupyter will broadcast. The following three lines are needed, all the rest can be commented:
 
 ```
 c = get_config()
 c.NotebookApp.ip = '0.0.0.0'
-c.NotebookApp.port = 8990 <= change this port, for ex. 8890, 8790, etc.
+c.NotebookApp.port = XXX <= change this port; use the last four digits of your SCIPER number (to avoid colliding with other people on the same port).
 ```
 
 You can ignore SSL certificates.
 
-If you run `jupyter notebook` the notebook will start and be accessible at http://iccluster0XX.iccluster.epfl.ch:8890 (you need to enter your password)
+If you run `jupyter notebook` the notebook will start and be accessible at http://iccluster0XX.iccluster.epfl.ch:XXXX (you need to enter your password)
 
-In order to leave it open while you are executing things, you can run the notebook in a screen.
+In order to leave it open while you are executing things, you can run the notebook in `screen` (see below).
 
+#### Using a SSH tunnel
+
+You can also use a SSH tunnel, which is easier, but somewhat more brittle (you will need to reconnect the SSH tunnel when you lose the connection, e.g. because you suspended your machine).
+
+1. Connect to the remote server setting up a SSH tunnel. Run the following command from your local machine. As the port number XXXX, use the last four digits of your SCIPER number (to avoid colliding with other people on the same port):    
+`ssh -L XXXX:localhost:XXXX [gasparname]@iccluster0NN.iccluster.epfl.ch`
+2. Launch Jupyter notebook or lab on the node (again replacing XXXX with the same port number):    
+`jupyter notebook --no-browser --port=XXXX`
+
+Your notebook is now accessible at `https://localhost:XXXX`. You may need a token, so look at the message given by Jupyter notebook / lab when you run it.
+
+In order to leave it open while you are executing things, you should run the notebook in a `screen` (see below).
 
 ### How to create another shell session and detach from it: use `screen`     
 
@@ -138,7 +156,8 @@ In order to leave it open while you are executing things, you can run the notebo
 - `cd [your repo]`
 - `screen -S work` => you are in a screen named "work" where you will launch the notebook
 - activate your env
-- start Jupyter notebook (`jupyter notebook`) 
-- check the url `http://iccluster0XX.iccluster.epfl.ch:8890`
-- if all ok then exit the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
-
+- start Jupyter notebook (`jupyter notebook`, or `jupyter notebook --no-browser --port=XXXX` if you use a SSH tunnel)
+- open the URL in your web browser
+  - `http://iccluster0XX.iccluster.epfl.ch:XXXX` if you configured remote access
+  - `http://localhost:XXXX` if you use a SSH tunnel
+- if everything is ok then exit the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
