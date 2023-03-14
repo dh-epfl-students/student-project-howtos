@@ -63,6 +63,14 @@ If necessary your lab (DHLAB or LHST) can grant you access to a machine on the I
 -  :warning: **important**: the machine is shared and given the small size of `/`, do not store your data (i.e. the data you work with, intermediary results, models, various resources, etc.) in your `home` but under `scratch/students` where you can create your own folder. 
 
 
+Attention! When first connecting to the cluster node with `ssh`, you will get the follwing message:
+```sh
+The authenticity of host 'iccluster040.iccluster.epfl.ch (XX.XX.XX.XX)' can't be established.
+ECDSA key fingerprint is SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+Write `yes` and press ENTER to establish a first connection.
+
 ### For people using Python on a cluster node
 
 - create a **local** python environment using conda or pipenv. You need to ensure your environment is on the `/scratch/`, not `/home/`, to do so check guides just below.
@@ -74,7 +82,7 @@ Note: the following procedure for pipenv has not been thoroughly tested, if you 
 
 To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
 
-1) Create the temporary directory `mkdir /scratch/<your-scracth-folder>/.pipenv_tmpdir`	
+1) Create the temporary directory `mkdir /scratch/<your-scratch-folder>/.pipenv_tmpdir`	
 2) Add the following lines to your `/home/<user>/.bashrc/``file:
 ```sh
 export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
