@@ -85,10 +85,15 @@ Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [c
 	
 #### conda
 
-Before creating conda environments, you need to execute the following two commands. They configure conda so that environments (and packages) are stored on the `/scratch/` instead of the `/home/`:
+Before creating conda environments, you need to create a $USER folder on `/scratch` (`mkdir /scratch/$USER` and replace `$USER` with your username) and execute the following two commands. They configure conda so that environments (and packages) are stored on the `/scratch/` instead of the `/home/`:
 ```sh
 conda config --add envs_dirs /scratch/$USER/.conda/envs
 conda config --add pkgs_dirs /scratch/$USER/.conda/pkgs
+```
+If you do not have the rights to create the folder on `/scratch`, consider creating it in `/scratch/students/` (`mkdir /scratch/students/$USER`), and execute the previous commands with the new folder:
+```sh
+conda config --add envs_dirs /scratch/students/$USER/.conda/envs
+conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
 ```
 
 Moreover, it is good practice to regularly clean your conda packages: `clean conda --all`
