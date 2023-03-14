@@ -65,7 +65,7 @@ If necessary your lab (DHLAB or LHST) can grant you access to a machine on the I
 
 Attention! When first connecting to the cluster node with `ssh`, you will get the follwing message:
 ```sh
-The authenticity of host 'iccluster040.iccluster.epfl.ch (XX.XX.XX.XX)' can't be established.
+The authenticity of host 'iccluster0XX.iccluster.epfl.ch (XX.XX.XX.XX)' can't be established.
 ECDSA key fingerprint is SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
