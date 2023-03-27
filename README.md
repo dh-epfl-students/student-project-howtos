@@ -1,6 +1,6 @@
 # DHLAB and LSHT student projects - Technical specifications  :hammer_and_wrench:
 
-:point_right: For information on generic organisation of projects, see these [slides]() (link broken at the moment, refer to email).
+:point_right: For information on generic organisation of projects, see these [slides](https://docs.google.com/presentation/d/1z6iEMMcHeRg0eRZqO0SqqvbVMh0pFAl-WYM3wPpPHRI/edit?usp=sharing) (accessible with EPFL gdrive login).
 
 Sections:
 - [GitHub repository](#github-repository)
