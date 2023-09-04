@@ -73,7 +73,7 @@ Write `yes` and press ENTER to establish a first connection.
 
 ### For people using Python on a cluster node
 
-- create a **local** python environment using conda or pipenv. You need to ensure your environment is on the `/scratch/`, not `/home/`, to do so check guides just below.
+- create a **local** python environment using conda or pipenv. You need to ensure your environment is on the `/scratch/`, not `/home/`, to do so check the guides just below.
 - to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
      
 #### pipenv
@@ -86,7 +86,7 @@ To ensure you are not using `/home`, there are two things to do: 1) ensure your 
 2) Add the following lines to your `/home/<user>/.bashrc/``file:
 ```sh
 export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
-export TMPDIR="/scratch/<your-scracth-folder>/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
+export TMPDIR="/scratch/<your-scratch-folder>/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
 ```
 	
 Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
