@@ -152,8 +152,8 @@ In order to leave it open while you are executing things, you should run the not
 **Main commands:**
 
 - create a session: `screen -S name_of_the_session`  =>  you are in
-- go out of a session: `Ctrl-A D` => session still running, you are out
-- reconnect to a session: `screen -r name_of_the_session`
+- "detach" from screen session: `Ctrl-A D` => session still running, you are out
+- reconnect (reattach) to a session: `screen -r name_of_the_session`
 - kill a session: from within the session, `Ctrl-A K`
 - in case you are reconnecting from inside (by mistake):  `screen -rd name_of_the_session`
 - to list all active screens: `screen -ls`
@@ -173,4 +173,4 @@ In order to leave it open while you are executing things, you should run the not
 - open the URL in your web browser
   - `http://iccluster0XX.iccluster.epfl.ch:XXXX` if you configured remote access
   - `http://localhost:XXXX` if you use a SSH tunnel
-- if everything is ok then exit the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
+- if everything is ok then detach the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
