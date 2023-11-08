@@ -104,9 +104,21 @@ conda config --add envs_dirs /scratch/students/$USER/.conda/envs
 conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
 ```
 
-Moreover, it is good practice to regularly clean your conda packages: `clean conda --all`
+Moreover, it is good practice to regularly clean your conda packages: `conda clean --all`
 
-Documentation: [envs_dirs](https://conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html#specify-environment-directories-envs-dirs), [pkgs_dirs](https://conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html#specify-package-directories-pkgs-dirs ), [clean](https://conda.io/projects/conda/en/latest/commands/clean.html)
+To create an environment: 
+```sh
+conda create -n ENV_NAME python=X.XX anaconda
+```
+For example, to create an environment with python 3.10: 
+```sh
+conda create -n py310 python=3.10 anaconda
+```
+In this example, the name of the environemnt is the same as the python version, but it have any name (depending on your needs).
+
+To activate an environemnt: `source activate ENV_NAME`
+To deactivate an environemnt: `source deactivate ENV_NAME`
+
 
 ### How to access a notebook on a remote server
 
