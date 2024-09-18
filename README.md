@@ -80,15 +80,10 @@ Write `yes` and press ENTER to establish a first connection.
 	
 #### conda
 
-Create a user folder in `/scratch/` (see above) and configure conda so that environments (and packages) are stored in `/scratch/` instead of the `/home/`:
+Create a user folder in `/scratch/` or `/scratch/students/` (see note above) and configure conda so that environments (and packages) are stored there instead of `/home/`:
 ```sh
 conda config --add envs_dirs /scratch/$USER/.conda/envs
 conda config --add pkgs_dirs /scratch/$USER/.conda/pkgs
-```
-or
-```sh
-conda config --add envs_dirs /scratch/students/$USER/.conda/envs
-conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
 ```
 
 Moreover, it is good practice to regularly clean your conda packages: `conda clean --all`
@@ -110,7 +105,7 @@ To deactivate an environemnt: `source deactivate ENV_NAME`
 
 `virtualenv` is currently configured for Python 3.8. See in the optional section how to configure it for Python 3.11.
 
-Let's create and activate a new environment inside a new folder (e.g., testenv) in your `/scratch/` user folder (see above):
+Let's create and activate a new environment inside a new folder (e.g., testenv) in your `/scratch/` or `/scratch/students/` user folder (see note above):
 ```
 virtualenv /scratch/$USER/testenv
 source /scratch/$USER/testenv/bin/activate
@@ -140,11 +135,11 @@ Note: the following procedure for pipenv has not been thoroughly tested, if you 
 
 To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
 
-1) Create the temporary directory `mkdir /scratch/<your-scratch-folder>/.pipenv_tmpdir`	
+1) Create the temporary directory `mkdir /scratch/$USER/.pipenv_tmpdir`	
 2) Add the following lines to your `/home/<user>/.bashrc/`file:
 ```sh
 export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
-export TMPDIR="/scratch/<your-scratch-folder>/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
+export TMPDIR="/scratch/$USER/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
 ```
 	
 Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
