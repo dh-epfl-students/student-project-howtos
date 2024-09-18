@@ -118,8 +118,9 @@ export TMPDIR=/scratch/$USER/tmp/
 pip install torch
 ```
 
-<ins>Optional</ins>
-> If you like to configure virtualenv for Python 3.11 (i.e., available via `python`/`python3`), you need to install it first in another directory (e.g., packages): 
+<ins>Optional</ins>  
+
+If you like to configure virtualenv for Python 3.11 (i.e., available via `python`/`python3`), you need to install it first in another directory (e.g., packages): 
 ```
 mkdir /scratch/$USER/packages
 python -m pip install virtualenv --target /scratch/$USER/packages
@@ -127,7 +128,7 @@ python -m pip install virtualenv --target /scratch/$USER/packages
 export PYTHONPATH=/scratch/$USER/packages:$PYTHONPATH
 alias virtualenv=/scratch/raimund/packages/bin/virtualenv
 ```
-> Note that you need to re-enter the last two commands every time you start a new session.
+Note that you need to re-enter the last two commands every time you start a new session.
 
 #### pipenv
 
