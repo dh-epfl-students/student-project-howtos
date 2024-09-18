@@ -216,3 +216,6 @@ In order to leave it open while you are executing things, you should run the not
   - `http://iccluster0XX.iccluster.epfl.ch:XXXX` if you configured remote access
   - `http://localhost:XXXX` if you use a SSH tunnel
 - if everything is ok then detach the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
+
+**Troubleshooting:**
+- Half-point floating precision (FP16, dtype=torch.bfloat16) is not supported by the GPU. Please use normal floating precision (FP32) instead.
