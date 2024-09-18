@@ -96,7 +96,7 @@ For example, to create an environment with python 3.10:
 ```sh
 conda create -n py310 python=3.10 anaconda
 ```
-In this example, the name of the environemnt is the same as the python version, but it have any name (depending on your needs).
+In this example, the name of the environment is the same as the python version, but it may have any name (depending on your needs).
 
 To activate an environemnt: `source activate ENV_NAME`  
 To deactivate an environemnt: `source deactivate ENV_NAME`
