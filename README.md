@@ -73,32 +73,14 @@ Write `yes` and press ENTER to establish a first connection.
 
 ### For people using Python on a cluster node
 
-- create a **local** python environment using conda or pipenv. You need to ensure your environment is on the `/scratch/`, not `/home/`, to do so check the guides just below.
+- create a **local** python environment using conda, virtualenv or pipenv. 
+- **Note**: Before creating environments, you need to create a $USER folder on `/scratch/students/$USER` (`mkdir /scratch/students/$USER` and replace `$USER` with your username). Alternatively use `/scratch/$USER/` (`mkdir /scratch/$USER`) if you have the folder permission. 
 - to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
-     
-#### pipenv
 
-Note: the following procedure for pipenv has not been thoroughly tested, if you test it and there are other steps, please update this document via a pull request
-
-To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
-
-1) Create the temporary directory `mkdir /scratch/<your-scratch-folder>/.pipenv_tmpdir`	
-2) Add the following lines to your `/home/<user>/.bashrc/``file:
-```sh
-export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
-export TMPDIR="/scratch/<your-scratch-folder>/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
-```
-	
-Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
 	
 #### conda
 
-Before creating conda environments, you need to create a $USER folder on `/scratch` (`mkdir /scratch/$USER` and replace `$USER` with your username) and execute the following two commands. They configure conda so that environments (and packages) are stored on the `/scratch/` instead of the `/home/`:
-```sh
-conda config --add envs_dirs /scratch/$USER/.conda/envs
-conda config --add pkgs_dirs /scratch/$USER/.conda/pkgs
-```
-If you do not have the rights to create the folder on `/scratch`, consider creating it in `/scratch/students/` (`mkdir /scratch/students/$USER`), and execute the previous commands with the new folder:
+Create a user folder in `/scratch/students/` or `/scratch/` (see note above) and configure conda so that environments (and packages) are stored there instead of `/home/`:
 ```sh
 conda config --add envs_dirs /scratch/students/$USER/.conda/envs
 conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
@@ -114,10 +96,54 @@ For example, to create an environment with python 3.10:
 ```sh
 conda create -n py310 python=3.10 anaconda
 ```
-In this example, the name of the environemnt is the same as the python version, but it have any name (depending on your needs).
+In this example, the name of the environment is the same as the python version, but it may have any name (depending on your needs).
 
-To activate an environemnt: `source activate ENV_NAME`
+To activate an environemnt: `source activate ENV_NAME`  
 To deactivate an environemnt: `source deactivate ENV_NAME`
+
+#### virtualenv
+
+`virtualenv` is currently configured for Python 3.8. See in the optional section how to configure it for Python 3.11.
+
+Let's create and activate a new environment inside a new folder (e.g., testenv) in your `/scratch/students/` or `/scratch/` user folder (see note above):
+```
+virtualenv /scratch/students/$USER/testenv
+source /scratch/students/$USER/testenv/bin/activate
+```
+Inside the environment, you can install packages (e.g., torch) via pip. To avoid getting an out of memory error, you can create and provide a temporary folder (e.g., tmp):
+```
+mkdir /scratch/students/$USER/tmp
+export TMPDIR=/scratch/students/$USER/tmp/ 
+
+pip install torch
+```
+
+<ins>Optional</ins>  
+
+If you like to configure virtualenv for Python 3.11 (i.e., available via `python`/`python3`), you need to install it first in another directory (e.g., packages): 
+```
+mkdir /scratch/students/$USER/packages
+python -m pip install virtualenv --target /scratch/students/$USER/packages
+
+export PYTHONPATH=/scratch/students/$USER/packages:$PYTHONPATH
+alias virtualenv=/scratch/students/$USER/packages/bin/virtualenv
+```
+Note that you need to re-enter the last two commands every time you start a new session.
+
+#### pipenv
+
+Note: the following procedure for pipenv has not been thoroughly tested, if you test it and there are other steps, please update this document via a pull request
+
+To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
+
+1) Create the temporary directory `mkdir /scratch/students/$USER/.pipenv_tmpdir`	
+2) Add the following lines to your `/home/<user>/.bashrc/`file:
+```sh
+export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
+export TMPDIR="/scratch/students/$USER/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
+```
+	
+Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
 
 
 ### How to access a notebook on a remote server
@@ -186,3 +212,6 @@ In order to leave it open while you are executing things, you should run the not
   - `http://iccluster0XX.iccluster.epfl.ch:XXXX` if you configured remote access
   - `http://localhost:XXXX` if you use a SSH tunnel
 - if everything is ok then detach the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
+
+**Troubleshooting:**
+- Half-point floating precision (FP16, dtype=torch.bfloat16) is not supported by the GPU. Please use normal floating precision (FP32) instead.
