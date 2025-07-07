@@ -6,7 +6,6 @@ Sections:
 - [GitHub repository](#github-repository)
 - [Working with a remote EPFL server](#working-with-a-remote-EPFL-server)
 
-
 ## GitHub repository:
 
 **Naming:**
@@ -46,8 +45,6 @@ You are free to structure your repository as you wish, but we advise to have:
 	    Copyright (c) Year EPFL    
 	    This program is licensed under the terms of the [license]. 
 	    
-
-
 ## Working with a remote EPFL server
 
 If necessary your lab (DHLAB or LHST) can grant you access to a machine on the IC cluster:
@@ -63,7 +60,7 @@ If necessary your lab (DHLAB or LHST) can grant you access to a machine on the I
 -  :warning: **important**: the machine is shared and given the small size of `/`, do not store your data (i.e. the data you work with, intermediary results, models, various resources, etc.) in your `home` but under `scratch/students` where you can create your own folder. 
 
 
-Attention! When first connecting to the cluster node with `ssh`, you will get the follwing message:
+Attention! When first connecting to the cluster node with `ssh`, you will get the following message:
 ```sh
 The authenticity of host 'iccluster0XX.iccluster.epfl.ch (XX.XX.XX.XX)' can't be established.
 ECDSA key fingerprint is SHA256:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.
@@ -71,13 +68,61 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 Write `yes` and press ENTER to establish a first connection.
 
-### For people using Python on a cluster node
+### Moving Data to and from the Remote Server
+
+Efficient data transfer is essential when working with remote cluster machines. You can use either `scp` or `rsync` to copy files or entire folders between your **local machine** and the **cluster**.
+
+#### Using `scp` (Secure Copy)
+
+**From your local machine to the remote server:**
+
+```bash
+scp /path/to/local/file.txt [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/
+```
+
+**From the remote server to your local machine:**
+
+```bash
+scp [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/file.txt /path/to/local/
+```
+
+**Copying a folder recursively:**
+
+```bash
+scp -r /path/to/local/folder [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/
+```
+
+#### Using `rsync` (Recommended for large or repeated transfers)
+
+`rsync` is more efficient for large datasets or syncing folders incrementally.
+
+**From your local machine to the remote server:**
+
+```bash
+rsync -avh /path/to/local/folder/ [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/
+```
+
+**From the remote server to your local machine:**
+
+```bash
+rsync -avh [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/ /path/to/local/folder/
+```
+
+**Common flags used:**
+
+- `-a`: archive mode (preserves permissions, symbolic links, etc.)
+- `-v`: verbose (shows what’s happening)
+- `-h`: human-readable sizes
+- `--progress`: (optional) shows progress during transfer
+
+> ⚠️ **Important:** Always transfer data to and from the `/scratch/students/$USER/` directory, not `/home`, to avoid quota limits and ensure good practices on shared machines.
+
+### How to work with Python on a cluster node - how to use a Python environment
 
 - create a **local** python environment using conda, virtualenv or pipenv. 
 - **Note**: Before creating environments, you need to create a $USER folder on `/scratch/students/$USER` (`mkdir /scratch/students/$USER` and replace `$USER` with your username). Alternatively use `/scratch/$USER/` (`mkdir /scratch/$USER`) if you have the folder permission. 
 - to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
 
-	
 #### conda
 
 Create a user folder in `/scratch/students/` or `/scratch/` (see note above) and configure conda so that environments (and packages) are stored there instead of `/home/`:
@@ -98,8 +143,8 @@ conda create -n py310 python=3.10 anaconda
 ```
 In this example, the name of the environment is the same as the python version, but it may have any name (depending on your needs).
 
-To activate an environemnt: `source activate ENV_NAME`  
-To deactivate an environemnt: `source deactivate ENV_NAME`
+To activate an environment: `source activate ENV_NAME`  
+To deactivate an environment: `source deactivate ENV_NAME`
 
 #### virtualenv
 
