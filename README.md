@@ -224,9 +224,9 @@ In order to leave it open while you are executing things, you can run the notebo
 
 You can also use an SSH tunnel, which is easier, but somewhat more brittle (you will need to reconnect the SSH tunnel when you lose the connection, e.g. because you suspended your machine).
 
-1. Connect to the remote server by setting up an SSH tunnel. Run the following command from your local machine. As the port number XXXX, use the last four digits of your SCIPER number (to avoid colliding with other people on the same port):    
+- Connect to the remote server by setting up an SSH tunnel. Run the following command from your local machine. As the port number XXXX, use the last four digits of your SCIPER number (to avoid colliding with other people on the same port):  
 `ssh -L XXXX:localhost:XXXX [gasparname]@iccluster0NN.iccluster.epfl.ch`
-2. Launch Jupyter notebook or lab on the node (again replacing XXXX with the same port number):    
+- Launch Jupyter notebook or lab on the node (again replacing XXXX with the same port number):    
 `jupyter notebook --no-browser --port=XXXX`
 
 Your notebook is now accessible at `https://localhost:XXXX`. You may need a token, so look at the message given by Jupyter notebook / lab when you run it.
