@@ -183,8 +183,8 @@ Note: the following procedure for pipenv has not been thoroughly tested. If you 
 
 To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not in `/home`.
 
-1) Create the temporary directory `mkdir /scratch/students/$USER/.pipenv_tmpdir`	
-2) Add the following lines to your `/home/<user>/.bashrc/`file:
+- Create the temporary directory `mkdir /scratch/students/$USER/.pipenv_tmpdir`
+-  Add the following lines to your `/home/$USER/.bashrc/` file (`~/.bashrc`):
 ```sh
 export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
 export TMPDIR="/scratch/students/$USER/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
