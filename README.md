@@ -141,6 +141,8 @@ conda create -n ENV_NAME python=X.XX anaconda
 ```
 For example, to create an environment with python 3.11: 
 ```sh
+export PYTHONUTF8=1
+export LANG=C.UTF-8
 conda create -n py311 python=3.11 anaconda
 ```
 In this example, the name of the environment is the same as the python version, but it may have any name (depending on your needs).
