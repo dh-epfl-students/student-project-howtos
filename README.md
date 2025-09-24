@@ -4,7 +4,12 @@
 
 Sections:
 - [GitHub repository](#github-repository)
-- [Working with a remote EPFL server](#working-with-a-remote-EPFL-server)
+- [Working with a remote EPFL server](#working-with-a-remote-epfl-server)
+- [Managing jobs on the cluster](#managing-jobs-on-the-cluster)
+- [GPU usage](#gpu-usage)
+- [Data management](#data-management)
+- [Debugging and troubleshooting](#debugging-and-troubleshooting)
+- [Reproducibility and good practices](#reproducibility-and-good-practices)
 
 ## GitHub repository:
 
