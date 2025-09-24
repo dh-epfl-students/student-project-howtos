@@ -10,7 +10,7 @@ Sections:
 - [Data management](#data-management)
 - [Debugging and troubleshooting](#debugging-and-troubleshooting)
 - [Reproducibility and good practices](#reproducibility-and-good-practices)
-
+---
 ## GitHub repository
 
 ### Naming
@@ -190,7 +190,9 @@ export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the fol
 export TMPDIR="/scratch/students/$USER/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
 ```
 	
-Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
+Some sources: 
+- [temporary directory](https://github.com/pypa/pip/issues/5816)
+- [create pipenv in current directory](https://stackoverflow.com/questions/50598220/pipenv-how-to-force-virtualenv-directory)
 
 ### How to access a notebook on a remote server
 
@@ -264,8 +266,8 @@ Cluster nodes are shared. To avoid blocking others:
   ps -u $USER
   kill -9 <PID>
   ```
-**Documentation:**
-
+  
+Some sources: 
 - Tutorial: [https://linuxize.com/post/how-to-use-linux-screen/](https://linuxize.com/post/how-to-use-linux-screen/) 
 - Full documentation: [https://linux.die.net/man/1/screen](https://linux.die.net/man/1/screen)
 - Also available via `man screen`
