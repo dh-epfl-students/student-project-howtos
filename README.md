@@ -17,7 +17,7 @@ Sections:
 
 - use lower case;
 - use hyphens to separate tokens;
-- if related to a larger project, start with the name of this project, followed by the name of your project (e.g. `impresso-image-classification`);
+- if related to a larger project, start with the name of this project, followed by the name of your project (e.g. `impresso-image-classification` where `impresso` would be the name of the project);
 - in case of doubt, ask your supervisors;
 
 **Structure:**    
