@@ -21,11 +21,11 @@ Sections:
 - in case of doubt, ask your supervisors;
 
 **Structure:**    
-You are free to structure your repository as you wish, but we advise to have:
+You are free to structure your repository as you wish, but we advise having:
 
 - a `notebooks` folder, for your working notebook;
-- a `lib` folder, in case you convert your notebook in scripts with a command line interface;
-- a `report` folder, where you put the PDF and latex sources of your report;
+- a `lib` folder, in case you convert your notebook to scripts with a command line interface;
+- a `report` folder, where you put the PDF and LaTex sources of your report;
 - a README, with the information specified below.
 
 
@@ -36,7 +36,7 @@ You are free to structure your repository as you wish, but we advise to have:
     - the names of supervisors
     - the academic year
 - **About**: include a brief introduction of your project.
-- **Research summary**: include a brief summary of your approaches/implementations and an illlustration of your results.
+- **Research summary**: include a brief summary of your approaches/implementations and an illustration of your results.
 - **Installation and Usage**
     - dependencies: platform, libraries (for Python include a `requirements.txt` file)
     - compilation (if necessary)
@@ -52,7 +52,7 @@ You are free to structure your repository as you wish, but we advise to have:
 	    
 ## Working with a remote EPFL server
 
-If necessary your lab (DHLAB or LHST) can grant you access to a machine on the IC cluster:
+If necessary, your lab (DHLAB or LHST) can grant you access to a machine on the IC cluster:
 
 - ask your supervisor to gain access;
 - you need to be on campus or use VPN to access the machine;
@@ -124,9 +124,9 @@ rsync -avh [gasparname]@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/f
 
 ### How to work with Python on a cluster node - how to use a Python environment
 
-- create a **local** python environment using conda, virtualenv or pipenv. 
-- **Note**: Before creating environments, you need to create a $USER folder on `/scratch/students/$USER` (`mkdir /scratch/students/$USER` and replace `$USER` with your username). Alternatively use `/scratch/$USER/` (`mkdir /scratch/$USER`) if you have the folder permission. 
-- to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. with [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
+- create a **local** Python environment using conda, virtualenv or pipenv. 
+- **Note**: Before creating environments, you need to create a $USER folder on `/scratch/students/$USER` (`mkdir /scratch/students/$USER` and replace `$USER` with your username). Alternatively, use `/scratch/$USER/` (`mkdir /scratch/$USER`) if you have the folder permission. 
+- to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
 
 #### conda
 
@@ -144,13 +144,13 @@ export PYTHONUTF8=1
 export LANG=C.UTF-8
 conda create -n ENV_NAME python=X.XX anaconda
 ```
-For example, to create an environment with python 3.11: 
+For example, to create an environment with Python 3.11: 
 ```sh
 export PYTHONUTF8=1
 export LANG=C.UTF-8
 conda create -n py311 python=3.11 anaconda
 ```
-In this example, the name of the environment is the same as the python version, but it may have any name (depending on your needs).
+In this example, the name of the environment is the same as the Python version, but it may have any name (depending on your needs).
 
 To activate an environment: `source activate ENV_NAME`  
 To deactivate an environment: `source deactivate ENV_NAME`
@@ -164,7 +164,7 @@ Let's create and activate a new environment inside a new folder (e.g., testenv) 
 virtualenv /scratch/students/$USER/testenv
 source /scratch/students/$USER/testenv/bin/activate
 ```
-Inside the environment, you can install packages (e.g., torch) via pip. To avoid getting an out of memory error, you can create and provide a temporary folder (e.g., tmp):
+Inside the environment, you can install packages (e.g., torch) via pip. To avoid getting an out-of-memory error, you can create and provide a temporary folder (e.g., tmp):
 ```
 mkdir /scratch/students/$USER/tmp
 export TMPDIR=/scratch/students/$USER/tmp/ 
@@ -186,9 +186,9 @@ Note that you need to re-enter the last two commands every time you start a new 
 
 #### pipenv
 
-Note: the following procedure for pipenv has not been thoroughly tested, if you test it and there are other steps, please update this document via a pull request
+Note: the following procedure for pipenv has not been thoroughly tested. If you test it and there are other steps, please update this document via a pull request
 
-To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not on `/home`.
+To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not in `/home`.
 
 1) Create the temporary directory `mkdir /scratch/students/$USER/.pipenv_tmpdir`	
 2) Add the following lines to your `/home/<user>/.bashrc/`file:
@@ -202,7 +202,7 @@ Some sources: [temporary directory](https://github.com/pypa/pip/issues/5816), [c
 
 ### How to access a notebook on a remote server
 
-In order to access an instance of Jupyter notebook or Jupyter Lab running on a remote server, you can either configure Jupyter accordingly or use a SSH tunnel.
+In order to access an instance of Jupyter notebook or Jupyter Lab running on a remote server, you can either configure Jupyter accordingly or use an SSH tunnel.
 
 #### Configuring Jupyter notebook for remote access
 
@@ -212,7 +212,7 @@ In summary, you have to:
 
 - Run `jupyter notebook --generate-config`. This will create a `.jupyter` folder in your home (hidden, use `ls -a`).
 - Use `jupyter notebook password` to set a password.
-- Edit the `jupyter_notebook_config.py` file in order to set the port where jupyter will broadcast. The following three lines are needed, all the rest can be commented:
+- Edit the `jupyter_notebook_config.py` file in order to set the port where Jupyter will broadcast. The following three lines are needed, all the rest can be commented:
 
 ```
 c = get_config()
@@ -226,11 +226,11 @@ If you run `jupyter notebook` the notebook will start and be accessible at http:
 
 In order to leave it open while you are executing things, you can run the notebook in `screen` (see below).
 
-#### Using a SSH tunnel
+#### Using an SSH tunnel
 
-You can also use a SSH tunnel, which is easier, but somewhat more brittle (you will need to reconnect the SSH tunnel when you lose the connection, e.g. because you suspended your machine).
+You can also use an SSH tunnel, which is easier, but somewhat more brittle (you will need to reconnect the SSH tunnel when you lose the connection, e.g. because you suspended your machine).
 
-1. Connect to the remote server setting up a SSH tunnel. Run the following command from your local machine. As the port number XXXX, use the last four digits of your SCIPER number (to avoid colliding with other people on the same port):    
+1. Connect to the remote server by setting up an SSH tunnel. Run the following command from your local machine. As the port number XXXX, use the last four digits of your SCIPER number (to avoid colliding with other people on the same port):    
 `ssh -L XXXX:localhost:XXXX [gasparname]@iccluster0NN.iccluster.epfl.ch`
 2. Launch Jupyter notebook or lab on the node (again replacing XXXX with the same port number):    
 `jupyter notebook --no-browser --port=XXXX`
@@ -264,8 +264,8 @@ In order to leave it open while you are executing things, you should run the not
 - start Jupyter notebook (`jupyter notebook`, or `jupyter notebook --no-browser --port=XXXX` if you use a SSH tunnel)
 - open the URL in your web browser
   - `http://iccluster0XX.iccluster.epfl.ch:XXXX` if you configured remote access
-  - `http://localhost:XXXX` if you use a SSH tunnel
-- if everything is ok then detach the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
+  - `http://localhost:XXXX` if you use an SSH tunnel
+- if everything is ok, then detach the screen (`Ctr-a d`). You can now work in the notebook, open and close your browser as you want, it will keep running. 
 
 **Troubleshooting:**
 - Half-point floating precision (FP16, dtype=torch.bfloat16) is not supported by the GPU. Please use normal floating precision (FP32) instead.
