@@ -140,7 +140,7 @@ conda config --add envs_dirs /scratch/students/$USER/.conda/envs
 conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
 ```
 
-Create a new environment:
+Create a new environment with Python 3.11:
 ```sh
 export PYTHONUTF8=1
 export LANG=C.UTF-8
@@ -152,7 +152,7 @@ Deactivate: `source deactivate`
 
 #### virtualenv
 
-Default is Python 3.8. To create a new env:
+Default is Python 3.8, but we do not recommend it, best to work with the latest Python version. To create a new env:
 ```sh
 virtualenv /scratch/students/$USER/testenv
 source /scratch/students/$USER/testenv/bin/activate
