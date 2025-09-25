@@ -90,20 +90,20 @@ Efficient data transfer is essential when working with remote cluster machines. 
 
 **From your local machine to the remote server:**
 ```bash
-(OLD) scp -r /path/to/local/file.txt $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/
-scp -r /path/to/local/file.txt $USER@iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/
+scp -r /path/to/local/file.txt $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/
+(DHLAB iccluster040) scp -r /path/to/local/file.txt $USER@iccluster040.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/
 ```
 
 **From the remote server to your local machine:**
 ```bash
-(OLD) scp $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/file.txt /path/to/local/
-scp $iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/file.txt /path/to/local/
+scp $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/file.txt /path/to/local/
+(DHLAB iccluster040) scp $iccluster040.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/file.txt /path/to/local/
 ```
 
 **Copying a folder recursively:**
 ```bash
-(OLD) scp -r $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder /path/to/local/
-scp -r $iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/file.txt /path/to/folder
+scp -r $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder /path/to/local/
+(DHLAB iccluster040) scp -r $iccluster040.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/file.txt /path/to/folder
 
 ```
 
@@ -113,14 +113,14 @@ scp -r $iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/student
 
 **From your local machine to the remote server:**
 ```bash
-(OLD) rsync -avh /path/to/local/folder/ $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/
-rsync -avh /path/to/local/folder/ $USER@iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/folder/
+rsync -avh /path/to/local/folder/ $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/
+(DHLAB iccluster040) rsync -avh /path/to/local/folder/ $USER@iccluster040.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/folder/
 ```
 
 **From the remote server to your local machine:**
 ```bash
-(OLD) rsync -avh $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/ /path/to/local/folder/
-rsync -avh $USER@iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/folder/ /path/to/local/folder/
+rsync -avh $USER@iccluster0XX.iccluster.epfl.ch:/scratch/students/$USER/folder/ /path/to/local/folder/
+(DHLAB iccluster040) rsync -avh $USER@iccluster040.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratch/students/$USER/folder/ /path/to/local/folder/
 ```
 
 **Common flags used:**
@@ -195,21 +195,41 @@ The `/home` partition on **iccluster040** is very small and shared across all us
 
 ### How to work with Python on a cluster node
 
-Always create environments in `/rcp-scratch/iccluster040_scratch/students/$USER/` or `/rcp-scratch/iccluster040_scratch/$USER/`, not `/home`.
+⚠️ **Important:** Do not install environments in `/home`. Always use the scratch space.
 
-- create a **local** Python environment using conda, virtualenv or pipenv. 
-- **Note**: Before creating environments, you need to create a $USER folder on `/rcp-scratch/iccluster040_scratch/students/$USER` (`mkdir /rcp-scratch/iccluster040_scratch/students/$USER` and replace `$USER` with your username). Alternatively, use `/scratch/$USER/` (`mkdir /scratch/$USER`) if you have the folder permission. 
-- to easily code locally and run things remotely, configure your IDE to save your code on the remote server as you code (e.g. [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
+- **Generic cluster nodes**:  
+  Use `/scratch/students/$USER/`
+
+- **DHLAB-specific node (`iccluster040`)**:  
+  Use `/rcp-scratch/iccluster040_scratch/students/$USER/`
+
+---
+
+- Create a **local** Python environment using `conda`, `virtualenv`, or `pipenv`.  
+- **Note**: Before creating environments, you need to create your user folder, e.g.:  
+  ```sh
+  mkdir -p /rcp-scratch/iccluster040_scratch/students/$USER
+  ```
+  (replace with `/scratch/students/$USER/` on other nodes).  
+- To easily code locally and run things remotely, configure your IDE to sync code to the remote server (e.g. [PyCharm](https://www.jetbrains.com/help/pycharm/creating-a-remote-server-configuration.html), [VS Code](https://code.visualstudio.com/docs/remote/ssh-tutorial)).
+
+---
 
 #### conda
 
-Configure conda so environments are stored under `/rcp-scratch/iccluster040_scratch`:
+Configure conda so environments are stored in the scratch space:
+
 ```sh
+# On generic nodes
+conda config --add envs_dirs /scratch/students/$USER/.conda/envs
+conda config --add pkgs_dirs /scratch/students/$USER/.conda/pkgs
+
+# On iccluster040
 conda config --add envs_dirs /rcp-scratch/iccluster040_scratch/students/$USER/.conda/envs
 conda config --add pkgs_dirs /rcp-scratch/iccluster040_scratch/students/$USER/.conda/pkgs
 ```
 
-Create a new environment with Python 3.11:
+Then create a new environment with Python 3.11:
 ```sh
 export PYTHONUTF8=1
 export LANG=C.UTF-8
@@ -219,45 +239,52 @@ conda create -n py311 python=3.11 anaconda
 Activate: `source activate py311`  
 Deactivate: `source deactivate`
 
+---
+
 #### virtualenv
 
-Default is Python 3.8, but we do not recommend it, best to work with the latest Python version. To create a new env:
+Default system Python is 3.8, but we recommend using the latest version.  
+
 ```sh
+# Generic nodes
+virtualenv /scratch/students/$USER/testenv
+
+# iccluster040
 virtualenv /rcp-scratch/iccluster040_scratch/students/$USER/testenv
-source /rcp-scratch/iccluster040_scratch/students/$USER/testenv/bin/activate
+
+source /.../students/$USER/testenv/bin/activate
 ```
 
 Avoid memory errors:
 ```sh
-mkdir /rcp-scratch/iccluster040_scratch/students/$USER/tmp
-export TMPDIR=/rcp-scratch/iccluster040_scratch/students/$USER/tmp/
+mkdir /.../students/$USER/tmp
+export TMPDIR=/.../students/$USER/tmp/
 pip install torch
 ```
 
-<ins>Optional</ins>  
+(Replace `/.../students/$USER/` with either `/scratch/students/$USER/` or `/rcp-scratch/iccluster040_scratch/students/$USER/` depending on the node.)
 
-If you like to configure virtualenv for Python 3.11 (i.e., available via `python`/`python3`), you need to install it first in another directory (e.g., packages): 
-```
-mkdir /rcp-scratch/iccluster040_scratch/students/$USER/packages
-python -m pip install virtualenv --target /rcp-scratch/iccluster040_scratch/students/$USER/packages
-
-export PYTHONPATH=/rcp-scratch/iccluster040_scratch/students/$USER/packages:$PYTHONPATH
-alias virtualenv=/rcp-scratch/iccluster040_scratch/students/$USER/packages/bin/virtualenv
-```
-Note that you need to re-enter the last two commands every time you start a new session.
+---
 
 #### pipenv
 
-Note: the following procedure for pipenv has not been thoroughly tested. If you test it and there are other steps, please update this document via a pull request
+To avoid `/home` usage, configure pipenv to use scratch space:
 
-To ensure you are not using `/home`, there are two things to do: 1) ensure your pipenv environments are not installed in `/home`, 2) ensure pip's temporary directory (where pip downloads the files before loading them into the environment) is not in `/home`.
-
-- Create the temporary directory `mkdir /rcp-scratch/iccluster040_scratch/students/$USER/.pipenv_tmpdir`
--  Add the following lines to your `/home/$USER/.bashrc/` file (`~/.bashrc`):
 ```sh
-export PIPENV_VENV_IN_PROJECT=1 # tells pip to create the environment in the folder where you're creating it.
-export TMPDIR="/rcp-scratch/iccluster040_scratch/students/$USER/.pipenv_tmpdir" # tells pip to use this folder as the temporary directory
+# Generic nodes
+mkdir -p /scratch/students/$USER/.pipenv_tmpdir
+export TMPDIR="/scratch/students/$USER/.pipenv_tmpdir"
+
+# iccluster040
+mkdir -p /rcp-scratch/iccluster040_scratch/students/$USER/.pipenv_tmpdir
+export TMPDIR="/rcp-scratch/iccluster040_scratch/students/$USER/.pipenv_tmpdir"
 ```
+
+Also add to your `~/.bashrc`:  
+```sh
+export PIPENV_VENV_IN_PROJECT=1
+```
+
 	
 Some sources: 
 - [temporary directory](https://github.com/pypa/pip/issues/5816)
