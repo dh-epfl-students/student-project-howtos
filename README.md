@@ -132,6 +132,63 @@ rsync -avh $USER@iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratc
 
 ---
 
+## Best practices for saving space on `/home` (iccluster040)
+
+The `/home` partition on **iccluster040** is very small and shared across all users. To avoid filling it up and causing problems for everyone, please follow these guidelines.
+
+### Code
+
+- **Where to put it**  
+  - For student projects:  
+    `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
+  - Otherwise:  
+    `~/rcp-scratch/iccluster040_scratch/YOUR_USERNAME/`
+
+- **Why**  
+  - `/home` (root) is small and not meant for heavy use.  
+  - Storing in `/rcp-scratch` avoids quota issues and prevents system lock-ups of `iccluster040`.  
+  - Keep your code in **Git** and clone it on `iccluster040` or other machines/nodes (best practice everywhere).  
+  - (Extra) If you have access to **Run:AI**, you can run the code directly from there.
+
+### Data (datasets, resources, etc.)
+
+- **Where to put it**  
+  - Short-term (work in progress):  
+    `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
+  - Long-term (final datasets or valuable resources, if you have access):  
+    `/mnt/u12632_cdh_dhlab_002_files_nfs/` on `cdhvm0002.xaas.epfl.ch` (NAS)
+
+- **Why**  
+  - `/scratch` has been copied to `~/rcp-scratch/iccluster040_scratch/` but **may be wiped**.  
+  - `/home` is space-limited and **not safe for long-term storage**.  
+
+---
+
+## Practical steps to reduce `/home` usage
+
+- **Move your conda environments**  
+  Follow [these instructions](https://github.com/dh-epfl-students/student-project-howtos?tab=readme-ov-file#conda),  
+  but instead of `/scratch/students/` use:  
+  `/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`
+
+- **Move your `.cache` directory**  
+  From `/home/YOUR_USERNAME` to:  
+  `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/`
+
+  Create the folder first:
+  ```bash
+  mkdir -p ~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/
+  ```
+  Then export the following variables:
+  ```bash
+  export HF_HOME=~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/
+  export HF_BASE=~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/
+  export TRANSFORMERS_CACHE=~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/
+  ```
+  You can either run these commands every time or add them permanently to your ~/.bashrc.
+
+---
+
 ### How to work with Python on a cluster node
 
 Always create environments in `/rcp-scratch/iccluster040_scratch/students/$USER/` or `/rcp-scratch/iccluster040_scratch/$USER/`, not `/home`.
