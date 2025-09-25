@@ -8,9 +8,12 @@ Sections:
 - [Managing jobs on the cluster](#managing-jobs-on-the-cluster)
 - [GPU usage](#gpu-usage)
 - [Data management](#data-management)
+- [Best practices for working on a cluster node (DHLAB - `iccluster040`)](#best-practices-for-working-on-a-cluster-node-dhlab---iccluster040)
 - [Debugging and troubleshooting](#debugging-and-troubleshooting)
 - [Reproducibility and good practices](#reproducibility-and-good-practices)
+
 ---
+
 ## GitHub repository
 
 ### Naming
@@ -127,12 +130,13 @@ rsync -avh $USER@iccluster0XX.iccluster.epfl.ch:/rcp-scratch/iccluster040_scratc
 - `-h`: human-readable sizes  
 - `--progress`: (optional) shows progress during transfer
   
-> (OLD) ⚠️ **Important:** Always transfer data to and from the `/scratch/students/$USER/` directory, not `/home`, to avoid quota limits and ensure good practices on shared machines.
-> ⚠️ **Important:** Always transfer data to and from the `/rcp-scratch/iccluster040_scratch/students/$USER/` directory, not `/home`, to avoid quota limits and ensure good practices on shared machines.
+> ⚠️ **Important:** Always transfer data to and from the `/scratch/students/$USER/` directory, not `/home`, to avoid quota limits and ensure good practices on shared machines.
+
+> ⚠️ **Important:** For DHLAB, on node `iccluster040`, always transfer data to and from the `/rcp-scratch/iccluster040_scratch/students/$USER/` directory, not `/home`, to avoid quota limits and ensure good practices on shared machines.
 
 ---
 
-## Best practices for saving space on `/home` (iccluster040)
+## Best practices for working on a cluster node (DHLAB - `iccluster040`)
 
 The `/home` partition on **iccluster040** is very small and shared across all users. To avoid filling it up and causing problems for everyone, please follow these guidelines.
 
