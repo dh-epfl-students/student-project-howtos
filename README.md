@@ -58,7 +58,8 @@ If necessary, your lab (DHLAB or LHST) can grant you access to a machine on the 
 
 - ask your supervisor to gain access;
 - you need to be on campus or use VPN to access the machine;
-- login with gaspar credentials: ```ssh [gasparname]@iccluster0XX.iccluster.epfl.ch where 'XX' is the machine number```     
+- $USER = your Gaspar username
+- login with gaspar credentials: ```ssh $USER@iccluster0XX.iccluster.epfl.ch where 'XX' is the machine number```     
 
 ### Resources
 
