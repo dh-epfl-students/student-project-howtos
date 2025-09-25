@@ -68,7 +68,7 @@ If necessary, your lab (DHLAB or LHST) can grant you access to a machine on the 
 - 200GB of disk space on `/`  
 - 12TB of disk space under `/scratch` (THIS has newly changed! to `/rcp-scratch/iccluster040_scratch/`)
 
-⚠️ **Important**: the machine is shared and given the small size of `/`, do not store your data (i.e. datasets, intermediate results, models, etc.) in your `home` but under `/scratch/students/$USER/`.
+⚠️ **Important**: the machine is shared and given the small size of `/`, do not store your data (i.e. datasets, intermediate results, models, etc.) in your `home` but under `/rcp-scratch/iccluster040_scratch/students/$USER/`.
 
 When first connecting via SSH you will see a fingerprint message. Type `yes` to continue.  
 ```sh
