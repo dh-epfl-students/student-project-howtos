@@ -144,9 +144,9 @@ The `/home` partition on **iccluster040** is very small and shared across all us
 
 - **Where to put it**  
   - For student projects:  
-    `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
+    `/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
   - Otherwise:  
-    `~/rcp-scratch/iccluster040_scratch/YOUR_USERNAME/`
+    `/rcp-scratch/iccluster040_scratch/YOUR_USERNAME/`
 
 - **Why**  
   - `/home` (root) is small and not meant for heavy use.  
@@ -158,7 +158,7 @@ The `/home` partition on **iccluster040** is very small and shared across all us
 
 - **Where to put it**  
   - Short-term (work in progress):  
-    `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
+    `/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/`  
   - Long-term (final datasets or valuable resources, if you have access):  
     `/mnt/u12632_cdh_dhlab_002_files_nfs/` on `cdhvm0002.xaas.epfl.ch` (NAS)
 
@@ -177,7 +177,7 @@ The `/home` partition on **iccluster040** is very small and shared across all us
 
 - **Move your `.cache` directory**  
   From `/home/YOUR_USERNAME` to:  
-  `~/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/`
+  `/rcp-scratch/iccluster040_scratch/students/YOUR_USERNAME/.cache/`
 
   Create the folder first:
   ```bash
